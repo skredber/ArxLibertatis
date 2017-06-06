@@ -441,6 +441,8 @@ void ARX_Player_Rune_Add(RuneFlag rune);
 void ARX_Player_Rune_Remove(RuneFlag rune);
 void ARX_PLAYER_AddGold(long value);
 void ARX_PLAYER_AddGold(Entity * gold);
+void ARX_PLAYER_Modify_Attribute(PlayerAttribute & attribute);
+void ARX_PLAYER_Modify_Skill(PlayerSkill & skill);
 void ARX_PLAYER_AddBag();
 bool ARX_PLAYER_CanStealItem(Entity * item);
 

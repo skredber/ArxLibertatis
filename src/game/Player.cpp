@@ -2534,6 +2534,16 @@ void ARX_PLAYER_AddGold(Entity * gold) {
 	gold->destroy();
 }
 
+void ARX_PLAYER_Modify_Attribute(PlayerAttribute& attribute) {
+    player.m_attribute.add(attribute);
+    g_hudRoot.bookIconGui.requestHalo();
+}
+
+void ARX_PLAYER_Modify_Skill(PlayerSkill & skill) {
+    player.m_skill.add(skill);
+    g_hudRoot.bookIconGui.requestHalo();
+}
+
 void ARX_PLAYER_Start_New_Quest() {
 	
 	LogInfo << "Starting a new playthrough";

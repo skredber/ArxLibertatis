@@ -127,6 +127,90 @@ public:
 	
 };
 
+class AddAttributeCommand : public Command {
+
+public:
+
+    AddAttributeCommand() : Command("addattribute") { }
+
+    Result execute(Context & context) {
+
+        std::string name = context.getWord();
+
+        DebugScript(' ' << name);
+
+        float val = context.getFloat();
+
+        DebugScript(' ' << val);
+
+        PlayerAttribute attribute;
+
+        if(name == "strength") {
+            attribute.strength += val;
+        } else if (name == "dexterity") {
+            attribute.dexterity += val;
+        } else if (name == "constitution") {
+            attribute.constitution += val;
+        } else if (name == "mind") {
+            attribute.mind += val;
+        } else {
+            ScriptWarning << "unknown attribute name: " << name;
+            return Failed;
+        }
+
+        ARX_PLAYER_Modify_Attribute(attribute);
+        ARX_SOUND_PlayInterface(SND_SPELL_CREATE_FOOD);
+
+        return Success;
+    }
+};
+
+class AddSkillCommand : public Command {
+
+public:
+    AddSkillCommand() : Command("addskill") { }
+
+    Result execute(Context &context) {
+        std::string name = context.getWord();
+
+        DebugScript(' ' << name);
+
+        float val = context.getFloat();
+
+        DebugScript(' ' << val);
+
+        PlayerSkill skill;
+
+        if(name == "stealth") {
+            skill.stealth += val;
+        } else if (name == "mecanism") {
+            skill.mecanism += val;
+        } else if (name == "intuition") {
+            skill.intuition += val;
+        } else if (name == "ethereallink") {
+            skill.etheralLink += val;
+        } else if (name == "objectknowledge") {
+            skill.objectKnowledge += val;
+        } else if (name == "casting") {
+            skill.casting += val;
+        } else if (name == "projectile") {
+            skill.projectile += val;
+        } else if (name == "closecombat") {
+            skill.closeCombat += val;
+        } else if (name == "defense") {
+            skill.defense += val;
+        } else {
+            ScriptWarning << "unknown attribute name: " << name;
+            return Failed;
+        }
+
+        ARX_PLAYER_Modify_Skill(skill);
+        ARX_SOUND_PlayInterface(SND_WHOOSH);
+
+        return Success;
+    }
+};
+
 class RidiculousCommand : public Command {
 	
 public:
@@ -679,6 +763,8 @@ void setupScriptedPlayer() {
 	ScriptEvent::registerCommand(new AddBagCommand);
 	ScriptEvent::registerCommand(new AddXpCommand);
 	ScriptEvent::registerCommand(new AddGoldCommand);
+    ScriptEvent::registerCommand(new AddAttributeCommand);
+    ScriptEvent::registerCommand(new AddSkillCommand);
 	ScriptEvent::registerCommand(new RidiculousCommand);
 	ScriptEvent::registerCommand(new RuneCommand);
 	ScriptEvent::registerCommand(new QuestCommand);

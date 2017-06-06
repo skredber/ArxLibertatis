@@ -72,7 +72,8 @@ std::string Context::getCommand(bool skipNewlines) {
 			if(!word.empty()) {
 				break;
 			}
-			skipWhitespace(skipNewlines), pos--;
+            skipWhitespace(skipNewlines);
+            pos--;
 		} else {
 			word.push_back(c);
 		}
